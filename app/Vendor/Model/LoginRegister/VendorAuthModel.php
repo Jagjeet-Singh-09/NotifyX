@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Vendor\Model\LoginRegister;
 
 use Config\Database;
 
-class AuthModel
+class VendorAuthModel
 {
     protected $db;
 
@@ -15,7 +15,8 @@ class AuthModel
 
     public function createUser($phoneNumber, $email, $password, $firstName, $lastName)
     {
-        $sql = "INSERT INTO admin 
+
+        $sql = "INSERT INTO vendors 
                 (phone, email, password, first_name, last_name)
                 VALUES (?, ?, ?, ?, ?)";
 
@@ -30,7 +31,7 @@ class AuthModel
          $userId = $this->db->insertID();
 
         // FETCH USER DATA
-        $sql3 = "SELECT * FROM admin WHERE id = ?";
+        $sql3 = "SELECT * FROM vendors WHERE id = ?";
 
         $query = $this->db->query($sql3, [$userId]);
 
@@ -39,7 +40,7 @@ class AuthModel
 
     public function getDataByMail($email)
     {
-        $sql = "SELECT * FROM admin WHERE email = ?";
+        $sql = "SELECT * FROM vendors WHERE email = ?";
 
         $query = $this->db->query($sql, [$email]);
 

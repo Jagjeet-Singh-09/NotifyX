@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Admin\Model\Announcement;
 
 use Config\Database;
 

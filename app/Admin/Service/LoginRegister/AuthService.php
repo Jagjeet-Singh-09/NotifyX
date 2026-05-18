@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Admin\Services\LoginRegister;
 
-use App\Models\Admin\AuthModel;
+use App\Admin\Model\LoginRegister\AuthModel;
 
 class AuthService
 {

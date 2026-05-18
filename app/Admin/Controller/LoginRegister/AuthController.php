@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Admin\Controller\LoginRegister;
 
 use App\Controllers\BaseController;
-use App\Services\Admin\AuthService;
+use App\Admin\Services\LoginRegister\AuthService;
 use App\Validations\AdminValidations;
 
 

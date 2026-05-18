@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services\Admin;
-
+namespace App\Admin\Service\Announcement;
 use App\Helpers\ApiResponseHelper;
-use App\Models\Admin\AnnouncementModel;
+use App\Admin\Model\Announcement\AnnouncementModel;
 
 class AnnouncementService
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace Admin\Controller\Annoucement;
 
 use App\Controllers\BaseController;
-use App\Services\Admin\AnnouncementService;
+use App\Admin\Service\Announcement\AnnouncementService;
 
 
 
