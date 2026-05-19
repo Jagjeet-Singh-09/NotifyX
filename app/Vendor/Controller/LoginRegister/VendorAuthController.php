@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Vendor\Controllers\LoginRegister;
+namespace App\Vendor\Controller\LoginRegister;
 
 //use App\Vendor\Controllers\BaseController;
-use App\Vendor\Service\LoginRegister\vendorAuthService;
-use App\Vendor\Validations\AdminValidations;
+use App\Vendor\Service\LoginRegister\VendorAuthService;
+use App\Validations\AdminValidations;
 use App\Controllers\BaseController;
 
 
@@ -17,10 +17,8 @@ class VendorAuthController extends BaseController
 
     public function __construct()
     {
-        $this->vendorAuthService = new vendorAuthService();
+        $this->vendorAuthService = new VendorAuthService();
         $this->adminValidations = new AdminValidations();
-
-        
     }
 
 

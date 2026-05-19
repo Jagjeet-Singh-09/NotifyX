@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Services\LoginRegister;
+namespace App\Admin\Service\LoginRegister;
 
 use App\Admin\Model\LoginRegister\AuthModel;
 

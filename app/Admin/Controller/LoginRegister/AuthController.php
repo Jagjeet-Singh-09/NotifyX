@@ -3,7 +3,7 @@
 namespace App\Admin\Controller\LoginRegister;
 
 use App\Controllers\BaseController;
-use App\Admin\Services\LoginRegister\AuthService;
+use App\Admin\Service\LoginRegister\AuthService;
 use App\Validations\AdminValidations;
 
 
