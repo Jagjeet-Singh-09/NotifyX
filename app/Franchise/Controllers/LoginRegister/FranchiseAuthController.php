@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Admin\Controller\LoginRegister;
+namespace App\Franchise\Controllers\LoginRegister;
 
-use App\Controllers\BaseController;
-use App\Admin\Service\LoginRegister\AuthService;
+//use App\Vendor\Controllers\BaseController;
+use App\Franchise\Services\LoginRegister\FranchiseAuthService;
 use App\Validations\AdminValidations;
+use App\Controllers\BaseController;
 
 
 
-class AuthController extends BaseController
+class FranchiseAuthController extends BaseController
 {
-    protected $authService;
+    protected $franchiseAuthService;
     protected $adminValidations;
 
 
     public function __construct()
     {
-        $this->authService = new AuthService();
+        $this->franchiseAuthService = new FranchiseAuthService();
         $this->adminValidations = new AdminValidations();
     }
 
@@ -81,7 +82,7 @@ class AuthController extends BaseController
                     'message' => 'Please add Valid Last Name'
                 ]);
         }
-        $result = $this->authService->createUser($phoneNumber, $email, $hashedPassword, $firstname, $lastname);
+        $result = $this->franchiseAuthService->createUser($phoneNumber, $email, $hashedPassword, $firstname, $lastname);
 
 
 
@@ -126,7 +127,7 @@ class AuthController extends BaseController
                 ]);
         }
 
-        $result = $this->authService->checkLogIn($email, $password);
+        $result = $this->franchiseAuthService->checkLogIn($email, $password);
         if ($result['status'] == 'error') {
 
             return $this->response

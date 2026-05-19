@@ -8,10 +8,14 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->post('/api/Admin/register', '\App\Admin\Controller\LoginRegister\AuthController::createUser');
 $routes->post('/api/Admin/login', '\App\Admin\Controller\LoginRegister\AuthController::checkLogIn');
+$routes->post('/api/Admin/createPredefinedGroups', '\App\Admin\Controller\Groups\GroupController::createPreDefinedGroups');
 
 $routes->post('/api/Vendor/register', '\App\Vendor\Controller\LoginRegister\VendorAuthController::createUser');
 $routes->post('/api/Vendor/login', '\App\Vendor\Controller\LoginRegister\VendorAuthController::checkLogIn');
 $routes->post('/api/Vendor/login', '\App\Vendor\Controller\LoginRegister\VendorAuthController::checkLogIn');
+
+$routes->post('/api/franchise/register', '\App\Franchise\Controllers\LoginRegister\FranchiseAuthController::createUser');
+$routes->post('/api/franchise/login', '\App\Franchise\Controllers\LoginRegister\FranchiseAuthController::checkLogIn');
 
 
 $routes->post('/api/Admin/createAnnouncement', '\App\Admin\Controller\Annoucement\AnnouncementController::createAnnouncement');
