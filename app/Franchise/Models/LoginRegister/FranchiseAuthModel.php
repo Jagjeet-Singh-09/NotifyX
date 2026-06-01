@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Franchise\Models\LoginRegister;
 
 use Config\Database;
 
-class AuthModel
+class FranchiseAuthModel
 {
     protected $db;
 
@@ -15,9 +15,10 @@ class AuthModel
 
     public function createUser($phoneNumber, $email, $password, $firstName, $lastName)
     {
-        $sql = "INSERT INTO admin 
-                (phone, email, password, first_name, last_name)
-                VALUES (?, ?, ?, ?, ?)";
+
+        $sql = "INSERT INTO vendors 
+                (phone, email, password, first_name, last_name, role)
+                VALUES (?, ?, ?, ?, ?, 2)";
 
         $query=$this->db->query($sql, [
             $phoneNumber,
@@ -30,7 +31,7 @@ class AuthModel
          $userId = $this->db->insertID();
 
         // FETCH USER DATA
-        $sql3 = "SELECT * FROM admin WHERE id = ?";
+        $sql3 = "SELECT * FROM vendors WHERE id = ?";
 
         $query = $this->db->query($sql3, [$userId]);
 
@@ -39,7 +40,7 @@ class AuthModel
 
     public function getDataByMail($email)
     {
-        $sql = "SELECT * FROM admin WHERE email = ?";
+        $sql = "SELECT * FROM vendors WHERE email = ?";
 
         $query = $this->db->query($sql, [$email]);
 

@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Vendor\Controller\LoginRegister;
 
-use App\Controllers\BaseController;
-use App\Services\Admin\AuthService;
+//use App\Vendor\Controllers\BaseController;
+use App\Vendor\Service\LoginRegister\VendorAuthService;
 use App\Validations\AdminValidations;
+use App\Controllers\BaseController;
 
 
 
-class AuthController extends BaseController
+class VendorAuthController extends BaseController
 {
-    protected $authService;
+    protected $vendorAuthService;
     protected $adminValidations;
 
 
     public function __construct()
     {
-        $this->authService = new AuthService();
+        $this->vendorAuthService = new VendorAuthService();
         $this->adminValidations = new AdminValidations();
-
-        
     }
 
 
@@ -83,7 +82,7 @@ class AuthController extends BaseController
                     'message' => 'Please add Valid Last Name'
                 ]);
         }
-        $result = $this->authService->createUser($phoneNumber, $email, $hashedPassword, $firstname, $lastname);
+        $result = $this->vendorAuthService->createUser($phoneNumber, $email, $hashedPassword, $firstname, $lastname);
 
 
 
@@ -92,7 +91,7 @@ class AuthController extends BaseController
 
             return $this->response->setJSON([
                 "status" => "success",
-                "message" => "User registered successfully"
+                "message" => "Vendor registered successfully"
             ]);
         }
 
@@ -128,7 +127,7 @@ class AuthController extends BaseController
                 ]);
         }
 
-        $result = $this->authService->checkLogIn($email, $password);
+        $result = $this->vendorAuthService->checkLogIn($email, $password);
         if ($result['status'] == 'error') {
 
             return $this->response
