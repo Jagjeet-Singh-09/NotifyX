@@ -16,9 +16,9 @@ class FranchiseAuthModel
     public function createUser($phoneNumber, $email, $password, $firstName, $lastName)
     {
 
-        $sql = "INSERT INTO franchise 
-                (phone, email, password, first_name, last_name)
-                VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO vendors 
+                (phone, email, password, first_name, last_name, role)
+                VALUES (?, ?, ?, ?, ?, 2)";
 
         $query=$this->db->query($sql, [
             $phoneNumber,
@@ -31,7 +31,7 @@ class FranchiseAuthModel
          $userId = $this->db->insertID();
 
         // FETCH USER DATA
-        $sql3 = "SELECT * FROM franchise WHERE id = ?";
+        $sql3 = "SELECT * FROM vendors WHERE id = ?";
 
         $query = $this->db->query($sql3, [$userId]);
 
@@ -40,7 +40,7 @@ class FranchiseAuthModel
 
     public function getDataByMail($email)
     {
-        $sql = "SELECT * FROM franchise WHERE email = ?";
+        $sql = "SELECT * FROM vendors WHERE email = ?";
 
         $query = $this->db->query($sql, [$email]);
 

@@ -3,14 +3,19 @@
 namespace App\Franchise\Services\LoginRegister;
 
 use App\Franchise\Models\LoginRegister\FranchiseAuthModel;
+use App\Admin\Controller\Groups\GroupController;
 
 class FranchiseAuthService
 {
     protected $franchiseAuthModel;
+    protected $groupController;
+
 
     public function __construct()
     {
         $this->franchiseAuthModel = new FranchiseAuthModel();
+        $this->groupController=new GroupController();
+
     }
 
     public function createUser($phoneNumber, $email, $password, $firstName , $lastName)
@@ -24,6 +29,8 @@ class FranchiseAuthService
                 'last_name'  => $user['first_name'],
                 'id' => $user['id'],
             ]);
+        $this->groupController->createPreDefinedGroups();
+
 
         return $user;
     }

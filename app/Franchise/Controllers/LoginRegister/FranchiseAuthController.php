@@ -91,7 +91,7 @@ class FranchiseAuthController extends BaseController
 
             return $this->response->setJSON([
                 "status" => "success",
-                "message" => "User registered successfully"
+                "message" => "Franchise registered successfully"
             ]);
         }
 

@@ -14,14 +14,41 @@ class AnnouncementModel
     }
 
     public function createAnnouncement($data,$id){
-        $sql="Insert into announcements (title, description,starting_datetime, ending_datetime, admin_id) values(?,?,?,?,?)";
-        return $this->db->query($sql, [
+        $inclusions = json_encode($data['inclusions']);
+        $exclusions = json_encode($data['exclusions']);
+
+        $inclusionsLength = count($data["inclusions"]);
+        $validGroupNo=[0,1,2,3];
+
+        
+        if($data['group_no'] !== 0 && $inclusionsLength > 0) {
+            return "inclusionError";
+        }
+        
+        if(!in_array($data['group_no'] , $validGroupNo)) {
+            return "UnknownGroup";
+        }
+
+
+        $sql2="Insert into target_group (group_no,inclusions,exclusions) values ( ? , ? , ? )";
+        $query2 = $this->db->query($sql2,[$data['group_no'],$inclusions,$exclusions]);
+
+        $target_id = $this->db->insertID();
+
+        $sql="Insert into announcements (title, description,starting_datetime, ending_datetime, admin_id,target_group_id) values(?,?,?,?,?,?)";
+        $query = $this->db->query($sql, [
             $data['title'],
             $data['description'],
             $data['starting_datetime'],
             $data['ending_datetime'],
-            $id
+            $id,
+            $target_id
         ]);
+
+        
+       
+        return $query;
+
         
     }
 
@@ -62,13 +89,14 @@ class AnnouncementModel
     ";
 
     $this->db->query($sql, [
+
         $title,
         $starting_datetime,
         $ending_datetime,
         $data['id']
+        
     ]);
 
     return true;
 }
-
 }

@@ -3,14 +3,18 @@
 namespace App\Vendor\Service\LoginRegister;
 
 use App\Vendor\Model\LoginRegister\VendorAuthModel;
+use App\Admin\Controller\Groups\GroupController;
 
 class VendorAuthService
 {
     protected $vendorAuthModel;
+    protected $groupController;
 
     public function __construct()
     {
         $this->vendorAuthModel = new VendorAuthModel();
+        $this->groupController=new GroupController();
+
     }
 
     public function createUser($phoneNumber, $email, $password, $firstName , $lastName)
@@ -24,6 +28,8 @@ class VendorAuthService
                 'last_name'  => $user['first_name'],
                 'id' => $user['id'],
             ]);
+
+        //$this->groupController->createPreDefinedGroups();
 
         return $user;
     }

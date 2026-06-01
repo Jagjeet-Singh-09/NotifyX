@@ -50,4 +50,10 @@ class AnnouncementController extends BaseController
         return $this->AnnouncementService->updateAnnouncement($data);
 
     }
+
+    // public function setAnnouncement($target_group_id,$Announcement_id){
+    //     return $this->AnnouncementService->setAnnouncement($target_group_id,$Announcement_id);
+
+    // }
+    
 }

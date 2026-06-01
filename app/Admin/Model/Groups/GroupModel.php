@@ -16,44 +16,46 @@ class GroupModel
     public function createPreDefinedGroups()
     {
         // Vendors IDs
-        $sql = "SELECT id FROM vendors";
+        $sql = "SELECT id FROM vendors where role = 1";
         $vendors = $this->db->query($sql)->getResultArray();
 
         // Franchise IDs
-        $sql2 = "SELECT id FROM franchise";
+        $sql2 = "SELECT id FROM vendors where role = 2";
         $franchise = $this->db->query($sql2)->getResultArray();
+
+        $sql3 = "SELECT id FROM vendors";
+        $allVendors = $this->db->query($sql3)->getResultArray();
+
 
         // Convert multidimensional array to simple array
         $allVendorId = array_column($vendors, 'id');
         $allFranchiseId = array_column($franchise, 'id');
+        $allVendorsId = array_column($allVendors, 'id');
 
-        // Merge both arrays
-        $allUsers = array_merge($allVendorId, $allFranchiseId);
 
         // Convert array to JSON/string before storing
-        $allUsersJson = json_encode($allUsers);
+        $allVendorsJson = json_encode($allVendorsId);
         $vendorsJson = json_encode($allVendorId);
         $franchiseJson = json_encode($allFranchiseId);
 
         // Insert All Users
-        $sql3 = "INSERT INTO target_group (id, group_name, group_members_id)
-                 VALUES (?, ?, ?)";
+        $sql3 = "UPDATE target_group SET group_name = ?, group_members_id = ? WHERE id = ?;";
 
-        $result = $this->db->query($sql3, [1, "All Users", $allUsersJson]);
+        $result = $this->db->query($sql3, ["All Users", $allVendorsJson,1]);
 
         if (!$result) {
             return false;
         }
 
         // Insert All Vendors
-        $result2 = $this->db->query($sql3, [2, "All Vendor", $vendorsJson]);
+        $result2 = $this->db->query($sql3, ["All Vendor", $vendorsJson, 2]);
 
         if (!$result2) {
             return false;
         }
 
         // Insert All Franchise
-        $result3 = $this->db->query($sql3, [3, "All Franchise", $franchiseJson]);
+        $result3 = $this->db->query($sql3, ["All Franchise", $franchiseJson, 3]);
 
         if (!$result3) {
             return false;
